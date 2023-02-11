@@ -35,7 +35,7 @@ async function returnMovie(url){
             
             title.innerHTML = `${element.title}`
             img.src = IMGPATH + element.poster_path;
-            vote_average.innerHTML = Math.round(element.vote_average* 10)/10 + '⭐'
+            vote_average.innerHTML = Math.round(element.vote_average* 10)/10 + '<span id="voting-span-inner">⭐</span>'
             if(element.poster_path == null){
                 img.src = 'no-poster.png'
             }

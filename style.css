@@ -155,6 +155,9 @@ a .search-logo img{
         left: 0px;
         
     }
+    #voting-span-inner{
+        scale: .8;
+    }
     section .row .column .card{
         max-width: 300px;
 
