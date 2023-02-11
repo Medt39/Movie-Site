@@ -4,12 +4,14 @@ const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=46a907563e
 const formDiv = document.querySelector('form')
 const search = document.querySelector('#search-input')
 const sectionDiv = document.querySelector('#section')
-
+const siteTitle = document.querySelector('header h2')
 
 returnMovie(APILINK)
-function returnMovie(url){
-    fetch(url).then(res => res.json()).then((data)=>{
+async function returnMovie(url){
+    await fetch(url).then(res => res.json()).then((data)=>{
         data.results.forEach(element => {
+            const vote_average = document.createElement('span')
+            vote_average.setAttribute('id','vote_span')
             const row = document.createElement('div');
             row.setAttribute('class','row')
             const column = document.createElement('div');
@@ -25,6 +27,7 @@ function returnMovie(url){
 
             card.appendChild(center)
             center.appendChild(img)
+            center.appendChild(vote_average)
             card.appendChild(title)
             column.appendChild(card)
             row.appendChild(column)
@@ -32,6 +35,7 @@ function returnMovie(url){
             
             title.innerHTML = `${element.title}`
             img.src = IMGPATH + element.poster_path;
+            vote_average.innerHTML = Math.round(element.vote_average* 10)/10 + '⭐'
             if(element.poster_path == null){
                 img.src = 'no-poster.png'
             }
@@ -49,3 +53,6 @@ formDiv.addEventListener('submit',e=>{
         search.value = ''
     }
 })
+siteTitle.onclick = ()=>{
+    window.location.reload()
+}
